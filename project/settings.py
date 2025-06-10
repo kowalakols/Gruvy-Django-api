@@ -46,7 +46,31 @@ INSTALLED_APPS = [
     'playlist',
     'users',
     'rest_framework',
+    'corsheaders',
 ]
+
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1'] # local frontend urls without protocols
+
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173", # Local frontend url
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        "http://127.0.0.1:8000", # Local backend url
+        "http://localhost:8000" # localhost for good measure
+    ]
+
+else:
+    ALLOWED_HOSTS = [env('DEPLOYED_BACKEND_URL').replace('https://', '')] # don't include the protocol (https://)
+
+    CORS_ALLOWED_ORIGINS = [
+        env('DEPLOYED_FRONTEND_URL'), # Deployed frontend url only
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        env('DEPLOYED_BACKEND_URL'), # Deployed backend url only
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,9 +80,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
+
+
 
 TEMPLATES = [
     {
