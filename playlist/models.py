@@ -8,6 +8,7 @@ class playlist (models.Model):
     songs = models.ManyToManyField(
         to= music,
         related_name='playlists',
+        blank=True,
     )
     # user = models.ForeignKey(
     #     AUTH_USER_MODEL,

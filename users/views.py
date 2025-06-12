@@ -13,6 +13,7 @@ class SignUpView(APIView):
         serialized_user.save()
         return Response({ f'detail': 'Sign up successful.' })
     
+    
 
 # Profile view
 # Methods accepted: GET
