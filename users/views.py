@@ -17,9 +17,9 @@ class SignUpView(APIView):
 # Profile view
 # Methods accepted: GET
 # Path: /api/auth/profile
-class ProfileView(APIView):
-    permission_classes = [IsAuthenticated]
+# class ProfileView(APIView):
+#     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        profile = ProfileSerializer(request.user)
-        return Response(profile.data)
+#     def get(self, request):
+#         profile = ProfileSerializer(request.user)
+#         return Response(profile.data)

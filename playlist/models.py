@@ -1,5 +1,6 @@
 from django.db import models
 from music.models import music
+from project.settings import AUTH_USER_MODEL
 
 # Create your models here.
 class playlist (models.Model):
@@ -8,6 +9,11 @@ class playlist (models.Model):
         to= music,
         related_name='playlists',
     )
+    # user = models.ForeignKey(
+    #     AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     related_name='playlists'
+    # )
     
 
     def __str__(self):
