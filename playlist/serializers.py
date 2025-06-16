@@ -12,6 +12,7 @@ class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = playlist
         fields='__all__'
+        read_only_field = ['owner']
         depth = 1
 
     # def create(self, validated_data):

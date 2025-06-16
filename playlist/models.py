@@ -10,11 +10,13 @@ class playlist (models.Model):
         related_name='playlists',
         blank=True,
     )
-    # user = models.ForeignKey(
-    #     AUTH_USER_MODEL,
-    #     on_delete=models.CASCADE,
-    #     related_name='playlists'
-    # )
+    owner = models.ForeignKey(
+         AUTH_USER_MODEL,
+         on_delete=models.CASCADE,
+         related_name='playlists',
+         null=True,
+         blank=True,
+    )
     
 
     def __str__(self):
