@@ -1,11 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from .models import music
 from .serializers import MusicSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
 class MusicListView(APIView):
+    permission_classes = [AllowAny]
     def get(self, request):
         songs = music.objects.all()
         serialized_songs = MusicSerializer(songs, many=True)
@@ -18,6 +20,8 @@ class MusicListView(APIView):
             return Response(serialized_songs.data, 201)
 
 class MusicDetailView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, request, pk):
         song = get_object_or_404(music, pk=pk)
         serialized_songs  = MusicSerializer(song)
@@ -32,6 +36,5 @@ class MusicDetailView(APIView):
 
     def delete(self, request, pk):
         song = get_object_or_404(music, pk=pk)
-
         song.delete()
         return Response(status=204)

@@ -3,16 +3,15 @@ from music.serializers import MusicSerializer
 from rest_framework import serializers
 
 class PlaylistSerializer(serializers.ModelSerializer):
-    # songs = serializers.PrimaryKeyRelatedField(
-    #     many=True,
-    #     queryset=music.objects.all(),
-    #     required=False
-    # )
+    songs = MusicSerializer(
+         many=True,
+         required=False
+    )
 
     class Meta:
         model = playlist
         fields='__all__'
-        read_only_field = ['owner']
+        read_only_fields = ['owner']
         depth = 1
 
     # def create(self, validated_data):
