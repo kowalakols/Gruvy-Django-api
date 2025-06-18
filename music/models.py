@@ -11,4 +11,4 @@ class music(models.Model):
     song_url = models.URLField()
 
 def __str__(self):
-        return self
+        return f"{self.song_name} by {self.artist}"
